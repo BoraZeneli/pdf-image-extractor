@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Payment{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center px-4">
+  <div class="bg-white shadow-2xl rounded-3xl p-10 text-center max-w-md w-full animate-fade-in">
+
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Confirm Your Payment</h2>
+
+    {% if messages %}
+      <div class="mb-4">
+        {% for message in messages %}
+          <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded shadow text-sm">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <p class="text-gray-600 mb-6">
+      You’ve used all your free downloads.<br>
+      Please proceed with a payment of 
+      <span class="font-semibold text-lg text-red-600">€{{ amount }}</span> 
+      to download your selected images.
+    </p>
+
+    <!-- Replace this with actual PayPal button integration later -->
+    <a href="{% url 'download_zip_after_payment' %}" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-200">
+      Pay with PayPal
+    </a>
+
+    <div class="mt-6">
+      <a href="{% url 'upload_pdf' %}" class="text-sm text-white underline">
+        Cancel and go back
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

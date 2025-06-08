@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Select Images{% endblock %}
+
+{% block content %}
+<div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white shadow-2xl rounded-3xl w-full max-w-5xl p-10 animate-fade-in">
+    <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Select Images to Download</h2>
+
+    {% if messages %}
+      <div class="mb-6">
+        {% for message in messages %}
+          <p class="text-sm text-red-600 text-center">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if images %}
+      <form method="post" action="">
+        {% csrf_token %}
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mb-8">
+          {% for image in images %}
+            <label class="block cursor-pointer">
+              <input type="checkbox" name="selected_images" value="{{ image.id }}" class="sr-only peer">
+              <div class="border-2 border-transparent peer-checked:border-indigo-600 rounded-lg overflow-hidden transition-shadow hover:shadow-lg">
+                <img src="{{ image.image.url }}" alt="Image {{ image.id }}" class="w-full h-44 object-contain">
+              </div>
+            </label>
+          {% endfor %}
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-200">
+            Download Selected as ZIP
+          </button>
+        </div>
+      </form>
+    {% else %}
+      <p class="text-center text-gray-500">No images found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

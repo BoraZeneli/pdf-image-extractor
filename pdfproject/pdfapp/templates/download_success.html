@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Successful Download{% endblock %}
+
+{% block content %}
+<div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white shadow-2xl rounded-3xl w-full max-w-md p-10 animate-fade-in text-center">
+    <h2 class="text-3xl font-bold text-green-600 mb-4">✔ Download completed successfully!</h2>
+    <p class="text-gray-500 mb-6">You will be redirected to the homepage in 3 seconds...</p>
+    <a href="{% url 'upload_pdf' %}" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-200">
+      Return immediately
+    </a>
+  </div>
+</div>
+
+<script>
+  try {
+    setTimeout(function() {
+      window.location.href = "{% url 'upload_pdf' %}";
+    }, 3000);
+  } catch (e) {
+    console.error("Redirect failed:", e);
+  }
+</script>
+{% endblock %}
